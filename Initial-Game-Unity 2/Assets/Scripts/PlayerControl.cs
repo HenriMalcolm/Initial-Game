@@ -25,9 +25,9 @@ public class PlayerControl : MonoBehaviour
         transform.Translate(Vector3.up * verticalInput * Time.deltaTime * speed);
         transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
 
+        //Launch bullet from the player when click "space"
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            //Launch bullet from the player when click "space"
             Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
         }
     }
