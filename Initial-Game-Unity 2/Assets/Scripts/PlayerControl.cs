@@ -7,8 +7,6 @@ public class PlayerControl : MonoBehaviour
     private float horizontalInput;
     private float verticalInput;
     public float speed = 15.0f;
-
-    public GameObject projectilePrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,10 +23,5 @@ public class PlayerControl : MonoBehaviour
         transform.Translate(Vector3.up * verticalInput * Time.deltaTime * speed);
         transform.Translate(Vector3.right * horizontalInput * Time.deltaTime * speed);
 
-        //Launch bullet from the player when click "space"
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            Instantiate(projectilePrefab, transform.position, projectilePrefab.transform.rotation);
-        }
     }
 }
