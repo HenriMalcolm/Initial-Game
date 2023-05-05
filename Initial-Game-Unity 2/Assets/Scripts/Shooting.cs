@@ -38,10 +38,6 @@ public class Shooting : MonoBehaviour
             }
         }
 
-
-
-
-
         if (Input.GetMouseButton(0) && canFire)
         {
             canFire = false;
