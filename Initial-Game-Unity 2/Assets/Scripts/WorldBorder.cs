@@ -4,15 +4,27 @@ using UnityEngine;
 
 public class WorldBorder : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Transform playerTransform;
+    public float xBorderSize;
+    public float yBorderSize;
+
+    private void LateUpdate()
     {
-        
+        Vector3 pos = playerTransform.position;
+        pos.x = Mathf.Clamp(pos.x, -xBorderSize, xBorderSize);
+        pos.y = Mathf.Clamp(pos.y, -yBorderSize, yBorderSize);
+        playerTransform.position = pos;
+
+        if (pos.x == -xBorderSize || pos.x == xBorderSize || pos.y == -yBorderSize || pos.y == yBorderSize)
+        {
+            Debug.Log("Player died!");
+            Destroy(playerTransform.gameObject);
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnDrawGizmosSelected()
     {
-        
+        Gizmos.color = Color.white;
+        Gizmos.DrawWireCube(transform.position, new Vector3(xBorderSize * 2, yBorderSize * 2, 0f));
     }
 }

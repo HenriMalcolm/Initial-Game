@@ -7,7 +7,11 @@ public class RangedEnemy : MonoBehaviour
     public Transform target;
     public float speed = 3f;
     public float rotateSpeed = 0.0025f;
+    public GameObject bulletPrefab;
+    public float fireRate = 1f; // In seconds
+
     private Rigidbody2D rb;
+    private float lastFiredTime;
 
     private void Start()
     {
@@ -23,6 +27,12 @@ public class RangedEnemy : MonoBehaviour
         else
         {
             RotateTowardsTarget();
+        }
+
+        if (Time.time - lastFiredTime >= fireRate)
+        {
+            lastFiredTime = Time.time;
+            Shoot();
         }
     }
 
@@ -55,6 +65,17 @@ public class RangedEnemy : MonoBehaviour
         }
     }
 
+    private void Shoot()
+    {
+        Vector3 spawnPosition = transform.position + transform.up * 0.5f;
+        GameObject bullet = Instantiate(bulletPrefab, spawnPosition, transform.rotation);
+
+        // Check if the bullet will collide with the enemy itself
+        Collider2D enemyCollider = GetComponent<Collider2D>();
+        Collider2D bulletCollider = bullet.GetComponent<Collider2D>();
+        Physics2D.IgnoreCollision(enemyCollider, bulletCollider);
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -66,10 +87,11 @@ public class RangedEnemy : MonoBehaviour
             }
             Destroy(gameObject);
             target = null;
-        } else if (other.gameObject.CompareTag("Bullet")) {
+        }
+        else if (other.gameObject.CompareTag("Bullet"))
+        {
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
     }
-
 }
