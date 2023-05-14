@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    private float horizontalInput;
-    private float verticalInput;
-    public float speed = 15.0f;
+    private float horizontalInput; // Useing A and D
+    private float verticalInput; // Useing W and S
+    public float speed = 15.0f; // Speed of player
     public int health = 3; // Add a health variable
 
     // Update is called once per frame

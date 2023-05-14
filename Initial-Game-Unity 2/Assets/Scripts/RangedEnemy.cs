@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class RangedEnemy : MonoBehaviour
 {
-    public Transform target;
-    public float speed = 3f;
-    public float rotateSpeed = 0.0025f;
-    public GameObject bulletPrefab;
-    public float fireRate = 1f; // In seconds
+    public Transform target; // what the enemy will target
+    public float speed = 3f; // speed of the enemy
+    public float rotateSpeed = 0.0025f; // how fast the enemy rotates
+    public GameObject bulletPrefab; // Creates a prefab to attach bullet to
+    public float fireRate = 1f; // How fast the enemy will shoot, In seconds
 
     private Rigidbody2D rb;
     private float lastFiredTime;
@@ -70,7 +70,7 @@ public class RangedEnemy : MonoBehaviour
         Vector3 spawnPosition = transform.position + transform.up * 0.5f;
         GameObject bullet = Instantiate(bulletPrefab, spawnPosition, transform.rotation);
 
-        // Check if the bullet will collide with the enemy itself
+        // Check if the bullet will collide with the enemy itself ( when the bullet spawns it will not kill itself )
         Collider2D enemyCollider = GetComponent<Collider2D>();
         Collider2D bulletCollider = bullet.GetComponent<Collider2D>();
         Physics2D.IgnoreCollision(enemyCollider, bulletCollider);
