@@ -7,7 +7,9 @@ public class BulletScript : MonoBehaviour
     private Vector3 mousePos;
     private Camera mainCam;
     private Rigidbody2D rb;
-    public float force;
+    public float force; // speed at witch bullet moves
+    public float lifetime = 5f; // lifetime of the bullet in seconds
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,11 +22,13 @@ public class BulletScript : MonoBehaviour
         float rot = Mathf.Atan2(rotation.y, rotation.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, rot + 90);
 
+        // Destroy the bullet game object after 'lifetime' seconds
+        Destroy(gameObject, lifetime);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
