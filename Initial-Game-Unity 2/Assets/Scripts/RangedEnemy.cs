@@ -90,8 +90,10 @@ public class RangedEnemy : MonoBehaviour
         }
         else if (other.gameObject.CompareTag("Bullet"))
         {
+            LevelManager.manager.IncreaseScore(3);
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
     }
+
 }
