@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     public Transform target; // The target for the enemy to chase (usually the player)
     public float speed = 3f; // The speed at which the enemy moves
     public float rotateSpeed = 0.0025f; // The speed at which the enemy rotates to face its target
+    public float bullet;
 
     // Private variables that are not visible in the Inspector
     private Rigidbody2D rb; // The Rigidbody2D component attached to this enemy
@@ -83,36 +84,21 @@ public class Enemy : MonoBehaviour
     // Handle collisions with other GameObjects
     private void OnCollisionEnter2D(Collision2D other)
     {
-        // If the enemy collided with a GameObject with the "Player" tag...
         if (other.gameObject.CompareTag("Player"))
         {
-            // ...get the PlayerControl component attached to the other GameObject (if there is one)
             PlayerControl player = other.gameObject.GetComponent<PlayerControl>();
-
-            // If a PlayerControl component was found, make the player take damage
             if (player)
             {
                 player.TakeDamage();
             }
-
-            // Destroy the enemy and reset its target
             Destroy(gameObject);
             target = null;
         }
-        // If the enemy collided with a GameObject with the "Bullet" tag...
         else if (other.gameObject.CompareTag("Bullet"))
         {
-            // Get the bullet's BulletController component (if it has one)
-            BulletController bullet = other.gameObject.GetComponent<BulletController>();
-
-            // If a BulletController component was found, damage the enemy
-            if (bullet)
-            {
-                TakeDamage();
-            }
-
-            // Destroy the bullet
+            LevelManager.manager.IncreaseScore(1);
             Destroy(other.gameObject);
+            Destroy(gameObject);
         }
     }
 }
