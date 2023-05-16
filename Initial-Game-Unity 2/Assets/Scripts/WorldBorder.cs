@@ -17,7 +17,6 @@ public class WorldBorder : MonoBehaviour
 
         if (pos.x == -xBorderSize || pos.x == xBorderSize || pos.y == -yBorderSize || pos.y == yBorderSize)
         {
-            LevelManager.manager.GameOver();
             Debug.Log("Player died!");
             Destroy(playerTransform.gameObject);
         }
