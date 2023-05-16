@@ -4,10 +4,18 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+<<<<<<< HEAD
     public Transform target;
     public float speed = 3f;
     public float rotateSpeed = 0.0025f;
     private Rigidbody2D rb;
+=======
+    // Public variables that can be set in the Inspector
+    public Transform target; // The target for the enemy to chase (usually the player)
+    public float speed = 3f; // The speed at which the enemy moves
+    public float rotateSpeed = 0.0025f; // The speed at which the enemy rotates to face its target
+    public float bullet;
+>>>>>>> 479037160724293fc7d4122677c155acfa075fcc
 
     private void Start()
     {
@@ -66,7 +74,14 @@ public class Enemy : MonoBehaviour
             }
             Destroy(gameObject);
             target = null;
+<<<<<<< HEAD
         } else if (other.gameObject.CompareTag("Bullet")) {
+=======
+        }
+        else if (other.gameObject.CompareTag("Bullet"))
+        {
+            LevelManager.manager.IncreaseScore(1);
+>>>>>>> 479037160724293fc7d4122677c155acfa075fcc
             Destroy(other.gameObject);
             Destroy(gameObject);
         }
